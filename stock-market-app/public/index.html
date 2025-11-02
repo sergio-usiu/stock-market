@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Market WebSocket - USIU Project</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                        <path d="M4 28L12 16L18 22L28 8" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <h1>Real-Time Stock Market</h1>
+                </div>
+                <div class="connection-status">
+                    <div class="status-indicator" id="statusIndicator">
+                        <span class="status-dot"></span>
+                        <span id="statusText">Connecting...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Info Banner -->
+            <div class="info-banner">
+                <div class="info-content">
+                    <h3>WebSocket Stock Market Application</h3>
+                    <p>This application demonstrates real-time WebSocket communication with multiplexing. Multiple clients can connect and subscribe to different stocks through a single WebSocket connection. Watch the prices update live!</p>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value" id="clientCount">0</div>
+                        <div class="stat-label">Connected Clients</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="subscriptionCount">0</div>
+                        <div class="stat-label">Your Subscriptions</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="updateCount">0</div>
+                        <div class="stat-label">Updates Received</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Control Panel -->
+            <div class="control-panel">
+                <h2>Stock Subscription Controls</h2>
+                <div class="button-group" id="subscriptionButtons">
+                    <!-- Stock buttons added dynamically -->
+                </div>
+                <div class="action-buttons">
+                    <button class="btn btn-primary" onclick="subscribeAll()">Subscribe to All Stocks</button>
+                    <button class="btn btn-secondary" onclick="unsubscribeAll()">Unsubscribe All</button>
+                    <button class="btn btn-secondary" onclick="requestSummary()">View Market Summary</button>
+                </div>
+            </div>
+
+            <!-- Stock Grid -->
+            <div class="stock-section">
+                <h2>Live Stock Prices</h2>
+                <div class="stock-grid" id="stockGrid">
+                    <!-- Stock cards added dynamically -->
+                </div>
+            </div>
+
+            <!-- WebSocket Activity Log -->
+            <div class="activity-section">
+                <div class="section-header">
+                    <h2>WebSocket Activity Log</h2>
+                    <button class="btn btn-small" onclick="clearLog()">Clear Log</button>
+                </div>
+                <div class="activity-log" id="activityLog">
+                    <div class="log-entry log-info">
+                        <span class="log-time">--:--:--</span>
+                        <span class="log-message">Starting WebSocket connection...</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Technical Details -->
+            <div class="tech-details">
+                <h2>How It Works - Technical Details</h2>
+                <div class="details-grid">
+                    <div class="detail-card">
+                        <h3>Multiplexing</h3>
+                        <ul>
+                            <li>One WebSocket connection per client</li>
+                            <li>Each client can subscribe to multiple stocks</li>
+                            <li>Server tracks what each client subscribed to</li>
+                            <li>Only sends relevant stock data to each client</li>
+                            <li>More efficient than multiple connections</li>
+                        </ul>
+                    </div>
+                    <div class="detail-card">
+                        <h3>Bidirectional Communication</h3>
+                        <ul>
+                            <li>Client can send: subscribe, unsubscribe</li>
+                            <li>Server sends: real-time price updates</li>
+                            <li>Event-based messaging system</li>
+                            <li>Automatic reconnection if disconnected</li>
+                            <li>Two-way communication always active</li>
+                        </ul>
+                    </div>
+                    <div class="detail-card">
+                        <h3>Technologies Used</h3>
+                        <ul>
+                            <li>Node.js - Server-side JavaScript runtime</li>
+                            <li>Socket.io - WebSocket library</li>
+                            <li>Express.js - Web server framework</li>
+                            <li>HTML, CSS, JavaScript - Frontend</li>
+                            <li>Real-time data simulation</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p><strong>Socket Programming Group Project</strong></p>
+            <p>Cosmas Kiprotich Karonei | Dushime Didier Serge | Benhin Mwendwa</p>
+            <p>United States International University-Africa - School of Science and Technology</p>
+        </div>
+    </footer>
+
+    <!-- Socket.io Client Library -->
+    <script src="/socket.io/socket.io.js"></script>
+    <!-- Our Custom Client Script -->
+    <script src="js/client.js"></script>
+</body>
+</html>

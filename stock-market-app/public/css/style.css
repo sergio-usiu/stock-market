@@ -1,0 +1,590 @@
+/* 
+ * Stock Market WebSocket Application
+ * CSS Stylesheet - NASDAQ Inspired Design
+ * 
+ * Group Members:
+ * - Cosmas Kiprotich Karonei
+ * - Dushime Didier Serge
+ * - Benhin Mwendwa
+ * 
+ * USIU-Africa - 2025
+ */
+
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    color: #000000;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header Section - NASDAQ Blue */
+.header {
+    background-color: #0066cc;
+    color: #ffffff;
+    padding: 18px 0;
+    border-bottom: 3px solid #004c99;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo svg {
+    color: #ffffff;
+}
+
+.logo h1 {
+    font-size: 22px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+/* Connection Status */
+.connection-status {
+    background-color: #004c99;
+    padding: 8px 15px;
+    border-radius: 3px;
+    font-size: 14px;
+}
+
+.status-indicator {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #999999;
+}
+
+.status-indicator.connected .status-dot {
+    background-color: #00cc00;
+}
+
+.status-indicator.disconnected .status-dot {
+    background-color: #ff0000;
+}
+
+/* Main Content Area */
+.main-content {
+    padding: 25px 0;
+    background-color: #f5f5f5;
+}
+
+/* Info Banner */
+.info-banner {
+    background-color: #ffffff;
+    border: 2px solid #0066cc;
+    border-radius: 4px;
+    padding: 20px;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.info-content h3 {
+    color: #0066cc;
+    font-size: 20px;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.info-content p {
+    color: #333333;
+    font-size: 15px;
+    margin-bottom: 20px;
+}
+
+/* Stats Grid */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+}
+
+.stat-card {
+    background-color: #f0f0f0;
+    padding: 18px;
+    border-radius: 3px;
+    text-align: center;
+    border-left: 4px solid #0066cc;
+}
+
+.stat-value {
+    font-size: 32px;
+    font-weight: bold;
+    color: #000000;
+}
+
+.stat-label {
+    font-size: 12px;
+    color: #666666;
+    text-transform: uppercase;
+    margin-top: 5px;
+}
+
+/* Control Panel */
+.control-panel {
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    padding: 20px;
+    margin-bottom: 25px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.control-panel h2 {
+    color: #000000;
+    font-size: 18px;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #0066cc;
+    font-weight: bold;
+}
+
+/* Button Group */
+.button-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.stock-btn {
+    padding: 10px 18px;
+    border: 2px solid #cccccc;
+    background-color: #ffffff;
+    color: #000000;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.stock-btn:hover {
+    background-color: #f5f5f5;
+    border-color: #0066cc;
+}
+
+.stock-btn.subscribed {
+    background-color: #0066cc;
+    color: #ffffff;
+    border-color: #0066cc;
+}
+
+.stock-btn .indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #999999;
+}
+
+.stock-btn.subscribed .indicator {
+    background-color: #ffffff;
+}
+
+/* Action Buttons */
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-primary {
+    background-color: #0066cc;
+    color: #ffffff;
+}
+
+.btn-primary:hover {
+    background-color: #004c99;
+}
+
+.btn-secondary {
+    background-color: #666666;
+    color: #ffffff;
+}
+
+.btn-secondary:hover {
+    background-color: #4d4d4d;
+}
+
+.btn-small {
+    padding: 6px 12px;
+    font-size: 12px;
+}
+
+/* Stock Section */
+.stock-section {
+    margin-bottom: 25px;
+}
+
+.stock-section h2 {
+    color: #000000;
+    font-size: 20px;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #0066cc;
+    font-weight: bold;
+}
+
+/* Stock Grid */
+.stock-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+}
+
+.stock-card {
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    padding: 18px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    transition: all 0.2s;
+}
+
+.stock-card:hover {
+    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+}
+
+.stock-card.positive {
+    border-left: 5px solid #00cc00;
+}
+
+.stock-card.negative {
+    border-left: 5px solid #ff0000;
+}
+
+.stock-card.neutral {
+    border-left: 5px solid #999999;
+}
+
+/* Stock Card Header */
+.stock-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+}
+
+.stock-symbol {
+    font-size: 22px;
+    font-weight: bold;
+    color: #000000;
+}
+
+.stock-name {
+    font-size: 12px;
+    color: #666666;
+    margin-top: 3px;
+}
+
+.stock-badge {
+    padding: 4px 10px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: bold;
+    background-color: #f0f0f0;
+    color: #666666;
+}
+
+.stock-badge.subscribed {
+    background-color: #0066cc;
+    color: #ffffff;
+}
+
+/* Stock Price */
+.stock-price {
+    font-size: 26px;
+    font-weight: bold;
+    color: #000000;
+    margin-bottom: 8px;
+}
+
+/* Stock Change */
+.stock-change {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 12px;
+    border-radius: 3px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.stock-change.positive {
+    background-color: #e6ffe6;
+    color: #008000;
+}
+
+.stock-change.negative {
+    background-color: #ffe6e6;
+    color: #cc0000;
+}
+
+.stock-change.neutral {
+    background-color: #f5f5f5;
+    color: #666666;
+}
+
+/* Activity Section */
+.activity-section {
+    margin-bottom: 25px;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.section-header h2 {
+    color: #000000;
+    font-size: 18px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #0066cc;
+    font-weight: bold;
+}
+
+/* Activity Log */
+.activity-log {
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    padding: 15px;
+    max-height: 350px;
+    overflow-y: auto;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.activity-log::-webkit-scrollbar {
+    width: 8px;
+}
+
+.activity-log::-webkit-scrollbar-track {
+    background: #f5f5f5;
+}
+
+.activity-log::-webkit-scrollbar-thumb {
+    background: #cccccc;
+    border-radius: 3px;
+}
+
+.activity-log::-webkit-scrollbar-thumb:hover {
+    background: #999999;
+}
+
+/* Log Entry */
+.log-entry {
+    display: flex;
+    gap: 12px;
+    padding: 10px;
+    margin-bottom: 6px;
+    border-left: 3px solid #999999;
+    background-color: #f9f9f9;
+    border-radius: 3px;
+    font-size: 13px;
+}
+
+.log-entry.log-info {
+    border-left-color: #0066cc;
+}
+
+.log-entry.log-success {
+    border-left-color: #00cc00;
+}
+
+.log-entry.log-error {
+    border-left-color: #ff0000;
+}
+
+.log-entry.log-warning {
+    border-left-color: #ff9900;
+}
+
+.log-time {
+    color: #666666;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 12px;
+    min-width: 75px;
+}
+
+.log-message {
+    color: #333333;
+    flex: 1;
+}
+
+/* Technical Details */
+.tech-details {
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    padding: 20px;
+    margin-bottom: 25px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.tech-details h2 {
+    color: #000000;
+    font-size: 20px;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #0066cc;
+    font-weight: bold;
+}
+
+/* Details Grid */
+.details-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 18px;
+}
+
+.detail-card {
+    background-color: #f5f5f5;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    padding: 18px;
+}
+
+.detail-card h3 {
+    font-size: 17px;
+    margin-bottom: 12px;
+    color: #0066cc;
+    font-weight: bold;
+}
+
+.detail-card ul {
+    list-style: none;
+}
+
+.detail-card li {
+    padding: 6px 0;
+    padding-left: 18px;
+    color: #333333;
+    font-size: 14px;
+    position: relative;
+    line-height: 1.5;
+}
+
+.detail-card li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: #0066cc;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Footer */
+.footer {
+    background-color: #0066cc;
+    color: #ffffff;
+    padding: 20px 0;
+    text-align: center;
+    margin-top: 30px;
+    border-top: 3px solid #004c99;
+}
+
+.footer p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.footer strong {
+    color: #ffffff;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 15px;
+    }
+    
+    .header-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .logo {
+        justify-content: center;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .stock-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .details-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+    }
+    
+    .btn {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo h1 {
+        font-size: 18px;
+    }
+    
+    .info-content h3 {
+        font-size: 18px;
+    }
+    
+    .stock-symbol {
+        font-size: 20px;
+    }
+    
+    .stock-price {
+        font-size: 24px;
+    }
+}
