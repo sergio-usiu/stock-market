@@ -588,3 +588,22 @@ body {
         font-size: 24px;
     }
 }
+/* Stock Chart Styles */
+.stock-chart-container {
+    margin-top: 12px;
+    height: 60px;
+    position: relative;
+}
+
+.stock-chart {
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 3px;
+}
+
+/* Responsive chart adjustments */
+@media (max-width: 480px) {
+    .stock-chart-container {
+        height: 50px;
+    }
+}
