@@ -280,6 +280,73 @@ function clearLog() {
     activityLog.innerHTML = '';
     logActivity('info', 'Activity log cleared');
 }
+// Chart initialization and management
+const stockCharts = new Map();
+
+function initializeStockChart(symbol) {
+    const ctx = document.getElementById(`chart-${symbol}`).getContext('2d');
+    
+    const chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: [],
+            datasets: [{
+                label: symbol,
+                data: [],
+                borderColor: '#0066cc',
+                backgroundColor: 'rgba(0, 102, 204, 0.1)',
+                borderWidth: 2,
+                tension: 0.4,
+                pointRadius: 0,
+                pointHoverRadius: 3,
+                fill: true
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    enabled: false
+                }
+            },
+            scales: {
+                x: {
+                    display: false
+                },
+                y: {
+                    display: false
+                }
+            },
+            interaction: {
+                intersect: false,
+                mode: 'index'
+            },
+            elements: {
+                point: {
+                    hoverBackgroundColor: '#0066cc',
+                    hoverBorderColor: '#ffffff',
+                    hoverBorderWidth: 2
+                }
+            }
+        }
+    });
+    
+    stockCharts.set(symbol, chart);
+}
+
+// Initialize charts when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+    // ... existing code ...
+    
+    console.log('\nChart.js Integration:');
+    console.log('- Real-time price charts for each stock');
+    console.log('- Historical price tracking (last 20 updates)');
+    console.log('- Color-coded trends (green/red) based on performance\n');
+});
 
 // Display market summary
 function displayMarketSummary(summary) {

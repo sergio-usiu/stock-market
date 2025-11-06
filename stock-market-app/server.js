@@ -49,6 +49,11 @@ let connectedClients = 0;
  * subscribed to. This saves bandwidth compared to sending all stock data to everyone.
  */
 
+
+const priceHistory = {};
+Object.keys(stockSymbols).forEach(symbol => {
+    priceHistory[symbol] = [stockSymbols[symbol].price];
+});
 // Simulate real-time stock price changes
 function updateStockPrices() {
   Object.keys(stockSymbols).forEach(symbol => {
