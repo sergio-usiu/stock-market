@@ -299,7 +299,7 @@ This is an academic project. For questions or suggestions, contact any team memb
 
 - United States International University-Africa
 - School of Science and Technology
-- Course Instructor and Teaching Assistants
+- Course Instructor
 
 ---
 
