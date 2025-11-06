@@ -34,7 +34,7 @@
             <div class="info-banner">
                 <div class="info-content">
                     <h3>WebSocket Stock Market Application</h3>
-                    <p>This application demonstrates real-time WebSocket communication with multiplexing. Multiple clients can connect and subscribe to different stocks through a single WebSocket connection. Watch the prices update live!</p>
+    
                 </div>
                 <div class="stats-grid">
                     <div class="stat-card">
@@ -87,42 +87,7 @@
                 </div>
             </div>
 
-            <!-- Technical Details -->
-            <div class="tech-details">
-                <h2>How It Works - Technical Details</h2>
-                <div class="details-grid">
-                    <div class="detail-card">
-                        <h3>Multiplexing</h3>
-                        <ul>
-                            <li>One WebSocket connection per client</li>
-                            <li>Each client can subscribe to multiple stocks</li>
-                            <li>Server tracks what each client subscribed to</li>
-                            <li>Only sends relevant stock data to each client</li>
-                            <li>More efficient than multiple connections</li>
-                        </ul>
-                    </div>
-                    <div class="detail-card">
-                        <h3>Bidirectional Communication</h3>
-                        <ul>
-                            <li>Client can send: subscribe, unsubscribe</li>
-                            <li>Server sends: real-time price updates</li>
-                            <li>Event-based messaging system</li>
-                            <li>Automatic reconnection if disconnected</li>
-                            <li>Two-way communication always active</li>
-                        </ul>
-                    </div>
-                    <div class="detail-card">
-                        <h3>Technologies Used</h3>
-                        <ul>
-                            <li>Node.js - Server-side JavaScript runtime</li>
-                            <li>Socket.io - WebSocket library</li>
-                            <li>Express.js - Web server framework</li>
-                            <li>HTML, CSS, JavaScript - Frontend</li>
-                            <li>Real-time data simulation</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+            
         </div>
     </main>
 
