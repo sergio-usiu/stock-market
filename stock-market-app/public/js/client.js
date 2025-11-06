@@ -60,6 +60,7 @@ socket.on('initial-data', (data) => {
     initializeUI();
 });
 
+
 // Receive real-time stock updates (MULTIPLEXED DATA)
 socket.on('stock-update', (updates) => {
     updateCounter++;
@@ -71,6 +72,13 @@ socket.on('stock-update', (updates) => {
             const previousPrice = stocks[symbol].price;
             stocks[symbol] = data;
             updateStockCard(symbol, previousPrice);
+            
+            // NEW: Update chart with new price
+            if (data.history) {
+                updateChartData(symbol, data.history);
+            } else {
+                addPriceToChart(symbol, data.price);
+            }
         }
     });
 });
@@ -283,64 +291,49 @@ function clearLog() {
 // Chart initialization and management
 const stockCharts = new Map();
 
-function initializeStockChart(symbol) {
-    const ctx = document.getElementById(`chart-${symbol}`).getContext('2d');
+function updateChartWithHistory(symbol, history) {
+    const chart = stockCharts.get(symbol);
+    if (!chart) return;
     
-    const chart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: [],
-            datasets: [{
-                label: symbol,
-                data: [],
-                borderColor: '#0066cc',
-                backgroundColor: 'rgba(0, 102, 204, 0.1)',
-                borderWidth: 2,
-                tension: 0.4,
-                pointRadius: 0,
-                pointHoverRadius: 3,
-                fill: true
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    display: false
-                },
-                tooltip: {
-                    enabled: false
-                }
-            },
-            scales: {
-                x: {
-                    display: false
-                },
-                y: {
-                    display: false
-                }
-            },
-            interaction: {
-                intersect: false,
-                mode: 'index'
-            },
-            elements: {
-                point: {
-                    hoverBackgroundColor: '#0066cc',
-                    hoverBorderColor: '#ffffff',
-                    hoverBorderWidth: 2
-                }
-            }
-        }
-    });
+    chart.data.labels = Array.from({length: history.length}, (_, i) => i + 1);
+    chart.data.datasets[0].data = history;
+    chart.update('none');
+}
+
+function addPriceToChart(symbol, newPrice) {
+    const chart = stockCharts.get(symbol);
+    if (!chart) return;
     
-    stockCharts.set(symbol, chart);
+    chart.data.labels.push(chart.data.labels.length + 1);
+    chart.data.datasets[0].data.push(newPrice);
+    
+    if (chart.data.labels.length > 20) {
+        chart.data.labels.shift();
+        chart.data.datasets[0].data.shift();
+    }
+    
+    chart.update('none');
+}
+
+function updateChartData(symbol, history) {
+    const chart = stockCharts.get(symbol);
+    if (!chart) return;
+    
+    chart.data.labels = Array.from({length: history.length}, (_, i) => i + 1);
+    chart.data.datasets[0].data = history;
+    chart.update('none');
 }
 
 // Initialize charts when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
-    // ... existing code ...
+    console.log('Stock Market WebSocket Client Started');
+    console.log('Connecting to server...');
+    
+    console.log('\nMultiplexing Implementation:');
+    console.log('- Single WebSocket connection for all stock data');
+    console.log('- Subscribe to specific stocks you want to track');
+    console.log('- Server sends only your subscribed stock updates');
+    console.log('- Saves bandwidth and improves performance\n');
     
     console.log('\nChart.js Integration:');
     console.log('- Real-time price charts for each stock');
@@ -370,6 +363,11 @@ function displayMarketSummary(summary) {
     alert(message);
 }
 
+// Export functions for HTML onclick handlers
+window.subscribeAll = subscribeAll;
+window.unsubscribeAll = unsubscribeAll;
+window.requestSummary = requestSummary;
+window.clearLog = clearLog;
 // Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
     console.log('Stock Market WebSocket Client Started');

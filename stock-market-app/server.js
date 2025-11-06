@@ -90,15 +90,15 @@ function broadcastStockUpdates() {
       const updates = {};
       subscribedSymbols.forEach(symbol => {
         if (stockSymbols[symbol]) {
-          updates[symbol] = stockSymbols[symbol];
-        }
-      });
+          updates[symbol] = {...stockSymbols[symbol],
+      history: priceHistory[symbol] || [] // NEW: Include history
+    };
       
       // Send through WebSocket
       socket.emit('stock-update', updates);
-    }
-  });
-}
+    }})
+    };
+})}
 
 // WebSocket connection handling
 io.on('connection', (socket) => {
@@ -111,6 +111,7 @@ io.on('connection', (socket) => {
   // Send initial stock data
   socket.emit('initial-data', {
     stocks: stockSymbols,
+     priceHistory: priceHistory,
     timestamp: new Date().toISOString()
   });
   
