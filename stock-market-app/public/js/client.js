@@ -144,7 +144,8 @@ TML:
 
     stockGrid.appendChild(card);
 
-  ;
+      // Initialize empty chart
+    initializeStockChart(symbol);
 }
 
 // Update stock card
