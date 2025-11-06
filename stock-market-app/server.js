@@ -66,8 +66,18 @@ function updateStockPrices() {
     
     stock.price = parseFloat(newPrice.toFixed(2));
     stock.change = parseFloat(((stock.price - previousPrice) / previousPrice * 100).toFixed(2));
+
+        if (!priceHistory[symbol]) {
+      priceHistory[symbol] = [];
+    }
+    priceHistory[symbol].push(stock.price);
+    
+    // Keep only last 20 prices
+    if (priceHistory[symbol].length > 20) {
+      priceHistory[symbol].shift();
+    }
   });
-}
+};
 
 // Broadcast stock updates to subscribed clients
 function broadcastStockUpdates() {
