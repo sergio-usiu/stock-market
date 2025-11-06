@@ -5,7 +5,7 @@ A real-time stock market monitoring application demonstrating WebSocket programm
 ## Team Members
 
 - **Cosmas Kiprotich Karonei** - ckiprotich@usiu.ac.ke
-- **Dushime Didier Serge** - ddserge@usiu.ac.ke
+- **Dushime ** - ddserge@usiu.ac.ke
 - **Benhin Mwendwa** - benhinmwendwa@gmail.com
 
 **United States International University-Africa**  
@@ -312,7 +312,7 @@ This is an academic project. For questions or suggestions, contact any team memb
 For questions about this project, please contact:
 
 - **Cosmas Kiprotich Karonei** - ckiprotich@usiu.ac.ke
-- **Dushime Didier Serge** - ddserge@usiu.ac.ke
+- **Dushime** - ddserge@usiu.ac.ke
 - **Benhin Mwendwa** - benhinmwendwa@gmail.com
 
 **University:** United States International University-Africa  
