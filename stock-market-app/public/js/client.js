@@ -136,9 +136,15 @@ function createStockCard(symbol, data) {
             <span>${changeSymbol}</span>
             <span>${Math.abs(data.change).toFixed(2)}%</span>
         </div>
+        <div class="stock-chart-container">
+    <canvas class="stock-chart" id="chart-${symbol}" width="200" height="60"></canvas> 
+</div>
     `;
-    
+TML:
+
     stockGrid.appendChild(card);
+
+  ;
 }
 
 // Update stock card
