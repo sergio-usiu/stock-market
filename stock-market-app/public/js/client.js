@@ -60,7 +60,6 @@ socket.on('initial-data', (data) => {
     initializeUI();
 });
 
-
 // Receive real-time stock updates (MULTIPLEXED DATA)
 socket.on('stock-update', (updates) => {
     updateCounter++;
@@ -72,13 +71,6 @@ socket.on('stock-update', (updates) => {
             const previousPrice = stocks[symbol].price;
             stocks[symbol] = data;
             updateStockCard(symbol, previousPrice);
-            
-            // NEW: Update chart with new price
-            if (data.history) {
-                updateChartData(symbol, data.history);
-            } else {
-                addPriceToChart(symbol, data.price);
-            }
         }
     });
 });
@@ -144,16 +136,9 @@ function createStockCard(symbol, data) {
             <span>${changeSymbol}</span>
             <span>${Math.abs(data.change).toFixed(2)}%</span>
         </div>
-        <div class="stock-chart-container">
-    <canvas class="stock-chart" id="chart-${symbol}" width="200" height="60"></canvas> 
-</div>
     `;
-TML:
-
+    
     stockGrid.appendChild(card);
-
-      // Initialize empty chart
-    initializeStockChart(symbol);
 }
 
 // Update stock card
@@ -288,58 +273,6 @@ function clearLog() {
     activityLog.innerHTML = '';
     logActivity('info', 'Activity log cleared');
 }
-// Chart initialization and management
-const stockCharts = new Map();
-
-function updateChartWithHistory(symbol, history) {
-    const chart = stockCharts.get(symbol);
-    if (!chart) return;
-    
-    chart.data.labels = Array.from({length: history.length}, (_, i) => i + 1);
-    chart.data.datasets[0].data = history;
-    chart.update('none');
-}
-
-function addPriceToChart(symbol, newPrice) {
-    const chart = stockCharts.get(symbol);
-    if (!chart) return;
-    
-    chart.data.labels.push(chart.data.labels.length + 1);
-    chart.data.datasets[0].data.push(newPrice);
-    
-    if (chart.data.labels.length > 20) {
-        chart.data.labels.shift();
-        chart.data.datasets[0].data.shift();
-    }
-    
-    chart.update('none');
-}
-
-function updateChartData(symbol, history) {
-    const chart = stockCharts.get(symbol);
-    if (!chart) return;
-    
-    chart.data.labels = Array.from({length: history.length}, (_, i) => i + 1);
-    chart.data.datasets[0].data = history;
-    chart.update('none');
-}
-
-// Initialize charts when DOM is ready
-document.addEventListener('DOMContentLoaded', () => {
-    console.log('Stock Market WebSocket Client Started');
-    console.log('Connecting to server...');
-    
-    console.log('\nMultiplexing Implementation:');
-    console.log('- Single WebSocket connection for all stock data');
-    console.log('- Subscribe to specific stocks you want to track');
-    console.log('- Server sends only your subscribed stock updates');
-    console.log('- Saves bandwidth and improves performance\n');
-    
-    console.log('\nChart.js Integration:');
-    console.log('- Real-time price charts for each stock');
-    console.log('- Historical price tracking (last 20 updates)');
-    console.log('- Color-coded trends (green/red) based on performance\n');
-});
 
 // Display market summary
 function displayMarketSummary(summary) {
@@ -363,11 +296,6 @@ function displayMarketSummary(summary) {
     alert(message);
 }
 
-// Export functions for HTML onclick handlers
-window.subscribeAll = subscribeAll;
-window.unsubscribeAll = unsubscribeAll;
-window.requestSummary = requestSummary;
-window.clearLog = clearLog;
 // Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
     console.log('Stock Market WebSocket Client Started');

@@ -49,11 +49,6 @@ let connectedClients = 0;
  * subscribed to. This saves bandwidth compared to sending all stock data to everyone.
  */
 
-
-const priceHistory = {};
-Object.keys(stockSymbols).forEach(symbol => {
-    priceHistory[symbol] = [stockSymbols[symbol].price];
-});
 // Simulate real-time stock price changes
 function updateStockPrices() {
   Object.keys(stockSymbols).forEach(symbol => {
@@ -66,18 +61,8 @@ function updateStockPrices() {
     
     stock.price = parseFloat(newPrice.toFixed(2));
     stock.change = parseFloat(((stock.price - previousPrice) / previousPrice * 100).toFixed(2));
-
-        if (!priceHistory[symbol]) {
-      priceHistory[symbol] = [];
-    }
-    priceHistory[symbol].push(stock.price);
-    
-    // Keep only last 20 prices
-    if (priceHistory[symbol].length > 20) {
-      priceHistory[symbol].shift();
-    }
   });
-};
+}
 
 // Broadcast stock updates to subscribed clients
 function broadcastStockUpdates() {
@@ -90,15 +75,15 @@ function broadcastStockUpdates() {
       const updates = {};
       subscribedSymbols.forEach(symbol => {
         if (stockSymbols[symbol]) {
-          updates[symbol] = {...stockSymbols[symbol],
-      history: priceHistory[symbol] || [] // NEW: Include history
-    };
+          updates[symbol] = stockSymbols[symbol];
+        }
+      });
       
       // Send through WebSocket
       socket.emit('stock-update', updates);
-    }})
-    };
-})}
+    }
+  });
+}
 
 // WebSocket connection handling
 io.on('connection', (socket) => {
@@ -111,7 +96,6 @@ io.on('connection', (socket) => {
   // Send initial stock data
   socket.emit('initial-data', {
     stocks: stockSymbols,
-     priceHistory: priceHistory,
     timestamp: new Date().toISOString()
   });
   
